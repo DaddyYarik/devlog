@@ -1,25 +1,20 @@
+<div align="center">
+
 # devlog
 
-> Stop wondering what you did yesterday.
+**Stop wondering what you did yesterday.**
 
-`devlog` is a dead-simple CLI that logs what you work on throughout the day and generates a clean standup report in seconds — no accounts, no cloud, no nonsense.
+`devlog` logs what you work on throughout the day and generates a clean standup report in seconds — no accounts, no cloud, no nonsense.
 
-```
-$ devlog standup
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue?logo=python&logoColor=white)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![pip install](https://img.shields.io/badge/pip%20install-devlog--cli-orange?logo=pypi&logoColor=white)](https://pypi.org/project/devlog-cli/)
 
-╭──────────────── Standup Report ─────────────────╮
-│ ✅  Done (yesterday)                             │
-│    • fixed login redirect bug                    │
-│    • deployed new /users endpoint                │
-│                                                  │
-│ 🔨  Doing (today)                                │
-│    • reviewing PR from @alice                    │
-│    • writing unit tests for auth module          │
-│                                                  │
-│ 🚧  Blockers                                     │
-│    • waiting on design mockups                   │
-╰──────────────────────────────────────────────────╯
-```
+<br>
+
+![devlog demo](demo.svg)
+
+</div>
 
 ---
 
@@ -29,7 +24,7 @@ $ devlog standup
 pip install devlog-cli
 ```
 
-## Quick start
+## Usage
 
 ```bash
 # Log what you're doing as you work
@@ -37,47 +32,44 @@ devlog add fixed the login redirect bug
 devlog add -t backend deployed new /users endpoint
 devlog add -t blocked waiting on design mockups from Alice
 
-# Check today's work
-devlog today
-
 # Next morning — generate standup in one command
 devlog standup
 ```
 
-## All commands
+## Commands
 
 | Command | Description |
 |---|---|
 | `devlog add <message>` | Add a log entry |
-| `devlog add -t TAG <message>` | Add entry with tag (use `blocked` for blockers) |
+| `devlog add -t TAG <message>` | Add entry with tag |
 | `devlog today` | Show today's entries |
 | `devlog yesterday` | Show yesterday's entries |
 | `devlog standup` | Print standup report |
-| `devlog week` | Show this week's overview |
-| `devlog ls` | List recent entries (last 7 days) |
-| `devlog ls -d 30` | List entries from last 30 days |
+| `devlog week` | This week's overview |
+| `devlog ls` | Recent entries (last 7 days) |
+| `devlog ls -d 30` | Entries from last 30 days |
 | `devlog delete <id>` | Delete an entry by ID |
 
-## How it works
+## Tags
 
-Entries tagged with `-t blocked` automatically appear in the **Blockers** section of the standup report. Everything else goes into Done (yesterday) and Doing (today).
+Tag entries with `-t` to organize them. Entries tagged `blocked` automatically appear in the **Blockers** section of the standup report:
 
 ```bash
 devlog add -t blocked waiting on API keys from DevOps
-#                   ↑ this entry appears under Blockers in standup
+#                   ↑ shows up under Blockers in `devlog standup`
 ```
 
 ## Why devlog?
 
 - **Zero config** — works out of the box, no setup required
 - **Local-first** — logs stored in `~/.devlog/logs.json`, your data stays yours
-- **No internet required** — 100% offline
-- **Tiny** — two dependencies: `click` + `rich`
-- **Standup-ready** — copy-paste the standup output directly into Slack or Teams
+- **Fully offline** — no internet, no accounts, no tracking
+- **Tiny** — two dependencies: [`click`](https://click.palletsprojects.com) + [`rich`](https://github.com/Textualize/rich)
+- **Standup-ready** — copy-paste the output directly into Slack or Teams
 
 ## Data
 
-All entries are stored locally in `~/.devlog/logs.json` as plain JSON. You own your data.
+All entries are stored locally in `~/.devlog/logs.json` as plain JSON:
 
 ```json
 [
@@ -85,7 +77,7 @@ All entries are stored locally in `~/.devlog/logs.json` as plain JSON. You own y
     "id": "a1b2c3d4",
     "timestamp": "2026-06-13T10:23:45",
     "date": "2026-06-13",
-    "message": "fixed login redirect bug",
+    "message": "fixed the login redirect bug",
     "tags": []
   }
 ]
@@ -93,4 +85,4 @@ All entries are stored locally in `~/.devlog/logs.json` as plain JSON. You own y
 
 ## License
 
-MIT
+[MIT](LICENSE)
